@@ -1,35 +1,27 @@
 import { Request, Response } from "express"
-import { v4 as uuidv4 } from 'uuid';
-import userModel from "../schemas/user-schema"
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient()
 
 export const getAllUsers = async (req: Request, res: Response) => {
-    const {name} = req.body;
-    const user = await userModel.findOne( {name} )
-
-    if (user) {
-        console.log(user)
-        return res.status(409).send('User already exists')
-
-    }
-
-    res.status(200).send("ok")
+    const users = await prisma.user.findMany();
+    res.status(200).json(users)
 }
 export const createUsers = async (req: Request, res: Response) => {
-    const guid = uuidv4()
-    const {name} = req.body;
-    if (!name) return res.status(400).send();
-
-    const user = await userModel.findOne( {name} ).exec()
-
+    const { email } = req.body;
+    const user = await prisma.user.findFirst({
+        where: {
+            email: email
+        }
+    })
     if (user) {
-        return res.status(409).send('User already registered')
+        return res.send('User found')
     }
 
-    const newUser = new userModel({_id:guid, name});
-    await newUser.save();
-
-    res.status(201).send("User created")
+    const newUser = await prisma.user.create({
+        data: req.body
+    })
+    res.status(201).json(newUser).send('User created')
 }
 export const updateUsers = (req: Request, res: Response) => {
     const userData = req.params;
