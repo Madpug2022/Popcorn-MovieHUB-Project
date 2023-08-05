@@ -10,8 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model brands {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  img  String
+  href String
+}
+
 model User {
-  id String @id @db.ObjectId @map("_id") @default(auto())
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
   userName String @unique
-  email String @unique
+  email    String @unique
+  password String @unique
 }

@@ -1,0 +1,13 @@
+.brand-img {
+    border: none !important;
+    height: 75px !important;
+    padding: 10px !important;
+}
+
+.brand-link {
+    text-decoration: none;
+}
+
+.brand-Link-Wrapper {
+    transition-duration: 500ms;
+}
