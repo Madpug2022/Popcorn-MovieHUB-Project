@@ -9,7 +9,8 @@ const FeaturedWrapper = styled.section`
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
 
     &::before{
         content: ' ';
@@ -19,7 +20,7 @@ const FeaturedWrapper = styled.section`
         top: 0;
         left: 0;
         height: 100vh;
-        width: 100vw;
+        width: 100%;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -84,6 +85,16 @@ const FeaturedWrapper = styled.section`
     div{
         display: flex;
     }
+    @media (max-width: 768px) {
+       h1{
+        font-size: 1.5em;
+
+       }
+       h3{
+        font-size: 1em;
+       }
+
+  }
 `
 
 export default FeaturedWrapper
