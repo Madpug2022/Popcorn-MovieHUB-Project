@@ -2,7 +2,8 @@ import './NavBar.css'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import logo from "../../../assets/resources/Logo Popcorn.jpg"
-import { PiMagnifyingGlassFill, PiPersonArmsSpreadBold } from "react-icons/pi";
+import { PiPersonArmsSpreadBold } from "react-icons/pi";
+import SearchButton from '../../styled/SearchButton';
 
 interface LinkType {
     id: number
@@ -52,9 +53,9 @@ const NavBar = () => {
         };
     }, []);
     return (
-        <nav className="navigation-bar" style={isScrolled ? { backgroundColor: 'black' } : { backgroundColor: 'transparent' }}>
+        <nav className="navigation-bar" style={isScrolled ? { backgroundColor: 'black' } : { backgroundColor: '' }}>
             <div className='left-nav'>
-                <PiMagnifyingGlassFill />
+                <SearchButton />
             </div>
             <div className="center-nav">
                 <ul className='nav-links'>
