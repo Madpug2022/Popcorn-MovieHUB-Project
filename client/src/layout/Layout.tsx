@@ -6,12 +6,9 @@ import './layout.css'
 const Layout = () => {
     return (
         <>
-            <header>
-                <NavbarRoutes />
-            </header>
-            <main>
-                <Outlet />
-            </main>
+
+            <NavbarRoutes />
+            <Outlet />
             <footer>
                 <Footer />
             </footer>

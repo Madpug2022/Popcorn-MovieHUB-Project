@@ -1,9 +1,10 @@
 import './NavBar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import logo from "../../../assets/resources/Logo Popcorn.jpg"
 import { PiPersonArmsSpreadBold } from "react-icons/pi";
 import SearchButton from '../../styled/SearchButton';
+
 
 interface LinkType {
     id: number
@@ -11,10 +12,17 @@ interface LinkType {
     name: string
 }
 
+const userTesting =
+{
+    id: 1,
+    name: 'test'
+}
+
+
 const linksLeft: LinkType[] = [
     {
         id: 1,
-        to: '/login',
+        to: `/movies/${userTesting.id}`,
         name: 'Movies'
     },
     {
@@ -38,6 +46,8 @@ const linksRigth: LinkType[] = [
 
 const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [notOnMain, setNotOnMain] = useState(false);
+    const navigate = useNavigate();
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 150) {
@@ -53,7 +63,7 @@ const NavBar = () => {
         };
     }, []);
     return (
-        <nav className="navigation-bar" style={isScrolled ? { backgroundColor: 'black' } : { backgroundColor: '' }}>
+        <nav className="navigation-bar" style={isScrolled || notOnMain ? { backgroundColor: 'black' } : { backgroundColor: '' }}>
             <div className='left-nav'>
                 <SearchButton />
             </div>
@@ -62,12 +72,12 @@ const NavBar = () => {
                     {linksLeft.map(link => {
                         return (
                             <li key={link.id}>
-                                <Link className='nav-link' to={link.to}>{link.name}</Link>
+                                <Link className='nav-link' to={link.to} onClick={() => { setNotOnMain(true) }}>{link.name}</Link>
                             </li>
                         )
                     })}
                 </ul>
-                <img src={logo} alt='logo-popcorn' style={isScrolled ? { display: 'block' } : { display: 'none' }} />
+                <img src={logo} alt='logo-popcorn' onClick={() => { navigate('/'); setNotOnMain(false) }} style={isScrolled || notOnMain ? { display: 'block' } : { display: 'none' }} />
                 <ul className='nav-links'>
                     {linksRigth.map(link => {
                         return (

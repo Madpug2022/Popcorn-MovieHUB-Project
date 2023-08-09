@@ -1,6 +1,7 @@
 import express from 'express';
 import userRoutes from './routes/user.routes';
 import brandRoutes from './routes/brand.routes';
+import genreRoutes from './routes/genre.routes';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -16,5 +17,6 @@ app.use(cors())
 
 app.use("/", userRoutes);
 app.use('/brands', brandRoutes);
+app.use('/genres', genreRoutes);
 
 export default app;

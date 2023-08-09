@@ -49,7 +49,7 @@ const SearchInput = () => {
     return (
         <StyledSearchBar>
             <StyledForm>
-                <StyledInput placeholder="Searching something?" />
+                <StyledInput placeholder="Search user" />
                 <button type="submit">
                     <PiMagnifyingGlassFill />
                 </button>

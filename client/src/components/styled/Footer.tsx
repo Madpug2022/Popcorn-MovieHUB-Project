@@ -6,6 +6,7 @@ const StyledFooterContainer = styled.div`
     grid-template-rows: 8vh 12vh;
     width: 100%;
     height: 20vh;
+    background-color: black;
 `;
 const StyledFCTop = styled.div`
     display:flex;
@@ -107,7 +108,7 @@ const Footer = () => {
             <StyledFCTop>
                 {fLinks.map((link) => {
                     return (
-                        <StyledFLink href="/" target="_blank">{link}</StyledFLink>)
+                        <StyledFLink key={link} href="/" target="_blank">{link}</StyledFLink>)
                 })}
                 <div>
                     <StyledFLink href="/" target="_blank"><AiFillGithub /></StyledFLink>

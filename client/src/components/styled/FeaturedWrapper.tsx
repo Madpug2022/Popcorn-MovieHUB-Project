@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import image from '../../assets/resources/fast-furious-7.webp'
 
-const FeaturedWrapper = styled.section`
+const FeaturedWrapper = styled.section<{ background: string }>`
 
     position: relative;
     display: flex;
@@ -16,7 +15,7 @@ const FeaturedWrapper = styled.section`
         content: ' ';
         z-index: -1;
         position: absolute;
-        background-image: url(${image});
+        background-image: url(${props => props.background});
         top: 0;
         left: 0;
         height: 100vh;

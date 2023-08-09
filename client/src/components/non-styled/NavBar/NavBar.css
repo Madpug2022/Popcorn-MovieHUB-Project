@@ -78,6 +78,7 @@
 .center-nav img {
     height: 5vh;
     transition: display 1s ease-in-out;
+    cursor: pointer;
 }
 
 .left-nav,

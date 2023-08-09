@@ -6,9 +6,10 @@ import { fetchData } from "../../api/fetchApi"
 import { SpinnerCircular } from 'spinners-react';
 import Publicity from "../../components/styled/Publicity";
 import premiumMember from '../../assets/resources/Premium-member.jpg'
+import * as images from '../../assets/resources/index'
 
 export interface BrandType {
-    id: number
+    id: string
     img: string
     href: string
 }
@@ -20,6 +21,9 @@ export interface PublicityType {
     order: string
     background: string
 }
+type BackgroundsType = {
+    [key: string]: string;
+};
 const publicity: PublicityType[] = [
     {
         id: 1,
@@ -41,7 +45,17 @@ const publicity: PublicityType[] = [
 
 const LazyBrandLogo = lazy(() => import('../../components/non-styled/BrandLogo/BrandLogo'));
 
+const backgrounds: BackgroundsType = images
+
 const FeaturedPage = () => {
+    const [background, setBackground] = useState<string>(backgrounds.c1);
+
+    function changeBackground() {
+        const keys = Object.keys(backgrounds);
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        setBackground(backgrounds[randomKey]);
+    }
+
     const [brands, setBrands] = useState<BrandType[] | []>([])
     useEffect(() => {
         const fetch = async () => {
@@ -49,11 +63,11 @@ const FeaturedPage = () => {
             setBrands(data)
         }
         fetch();
-    }, []);
-
+        setInterval(changeBackground, 8000)
+    }, [])
     return (
-        <>
-            <FeaturedWrapper>
+        <main>
+            <FeaturedWrapper background={background}>
                 <img src={logo} alt={`Logo for ${logo}`} />
                 <h1>If you can't enjoy it with Popcorn then you should forget it.</h1>
                 <h3>With Popcorn you can track a record of the movies and series you watch.<br /> Discover new ones. Share opinions and more.</h3>
@@ -77,7 +91,7 @@ const FeaturedPage = () => {
             </FeaturedWrapper>
             <Publicity id={publicity[0].id} background={publicity[0].background} title={publicity[0].title} content={publicity[0].content} image={publicity[0].image} order={publicity[0].order} />
             <Publicity id={publicity[1].id} background={publicity[1].background} title={publicity[1].title} content={publicity[1].content} image={publicity[1].image} order={publicity[1].order} />
-        </>
+        </main>
     )
 }
 
