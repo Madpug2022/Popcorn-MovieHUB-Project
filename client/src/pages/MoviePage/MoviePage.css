@@ -1,7 +1,7 @@
 .movie-page-container {
     width: 100%;
     height: auto;
-    padding-top: 6vh;
+    padding-top: 6.5vh;
 
     display: grid;
     grid-template-columns: 20% 80%;
@@ -68,4 +68,12 @@
     margin: 0 1vw;
     padding: 1vh 1vw;
     background: black;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.movie-pc-right::-webkit-scrollbar {
+    display: none;
 }

@@ -4,6 +4,7 @@ import { fetchData } from "../../api/fetchApi";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useParams } from "react-router-dom";
 import UploadBtn from "../../components/styled/UploadBtn";
+import MovieComponent from "../../components/styled/MovieComponent";
 import './MoviePage.css'
 
 interface GenreType {
