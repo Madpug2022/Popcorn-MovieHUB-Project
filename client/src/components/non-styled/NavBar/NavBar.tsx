@@ -27,7 +27,7 @@ const linksLeft: LinkType[] = [
     },
     {
         id: 2,
-        to: '/login',
+        to: `/series/${userTesting.id}`,
         name: 'Series'
     }
 ]

@@ -1,7 +1,9 @@
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useState, useEffect, CSSProperties } from "react";
 import { fetchData } from "../../api/fetchApi";
-import ClipLoader from "react-spinners/ClipLoader"
+import ClipLoader from "react-spinners/ClipLoader";
+import { useParams } from "react-router-dom";
+import UploadBtn from "../../components/styled/UploadBtn";
 import './MoviePage.css'
 
 interface GenreType {
@@ -13,28 +15,35 @@ const override: CSSProperties = {
     display: "block",
     margin: "auto",
 };
+interface PageType {
+    name: string;
+}
 
-const MoviePage = () => {
+const MoviePage = (props: PageType) => {
+    const { name } = props;
+
     const [watched, setWatched] = useState(false);
     const [genresData, setGenresData] = useState<GenreType[]>([]);
     const [loadingGenres, setLoadingGenres] = useState(false);
+    const params = useParams();
 
     useEffect(() => {
         const fetchGenres = async () => {
             const data = await fetchData('genres');
             setGenresData(data);
-            setLoadingGenres(false); // Move this line inside the fetch completion
+            setLoadingGenres(false);
         };
 
         setLoadingGenres(true);
         fetchGenres();
+        console.log(params)
     }, []);
 
     return (
         <main className="movie-page-container">
             <div className='movie-pc-left'>
                 <div className='mpl-title'>
-                    <h2>Movies</h2>
+                    <h2>{name}</h2>
                     <button className="togle-watched-btn" onClick={() => setWatched(!watched)}>
                         {watched ? (<AiFillEyeInvisible style={{ color: '#C41C19' }} />) : (<AiFillEye />)}
                     </button>
@@ -53,6 +62,14 @@ const MoviePage = () => {
                         ))}
                     </div>
                 )}
+                {name === 'Movies' &&
+                    <UploadBtn>
+                        Upload Movie
+                    </UploadBtn>}
+                {name === 'Series' &&
+                    <UploadBtn>
+                        Upload Series
+                    </UploadBtn>}
             </div>
             <div className='movie-pc-right'>
 

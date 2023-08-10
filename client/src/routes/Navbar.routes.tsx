@@ -11,7 +11,8 @@ const NavbarRoutes = () => {
                 <NavBar />
                 <Routes>
                     <Route index element={<FeaturedPage />} />
-                    <Route path='/movies/:id' element={<MoviePage />} />
+                    <Route path='/movies/:id' element={<MoviePage name={'Movies'} />} />
+                    <Route path='/series/:id' element={<MoviePage name={'Series'} />} />
                     <Route path='/login' element={<div>login</div>} />
                 </Routes>
             </BrowserRouter>

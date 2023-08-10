@@ -1,8 +1,8 @@
 .movie-page-container {
     width: 100%;
     height: auto;
-    padding-top: 10vh;
-    margin-bottom: 5vh;
+    padding-top: 6vh;
+
     display: grid;
     grid-template-columns: 20% 80%;
 }
@@ -13,10 +13,8 @@
     display: flex;
     flex-direction: column;
     padding: 25px;
-    background: rgba(247, 28, 28, 0.019);
-    box-shadow: 5px -5px 12px 0px rgba(255, 255, 255, 0.05) inset, -5px 5px 12px 0px rgba(255, 255, 255, 0.05) inset,
-        4px 7px 15px 0px rgba(0, 0, 0, 0.08), -1px 0px 2px 0px rgba(235, 20, 20, 0.3) inset;
-    backdrop-filter: blur(6px);
+    background: rgb(0, 0, 0);
+
 }
 
 
@@ -69,8 +67,5 @@
 .movie-pc-right {
     margin: 0 1vw;
     padding: 1vh 1vw;
-    background: rgba(247, 28, 28, 0.019);
-    box-shadow: 5px -5px 12px 0px rgba(255, 255, 255, 0.05) inset, -5px 5px 12px 0px rgba(255, 255, 255, 0.05) inset,
-        4px 7px 15px 0px rgba(0, 0, 0, 0.08), -1px 0px 2px 0px rgba(235, 20, 20, 0.3) inset;
-    backdrop-filter: blur(6px);
+    background: black;
 }
