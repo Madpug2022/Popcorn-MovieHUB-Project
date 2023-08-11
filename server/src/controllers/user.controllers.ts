@@ -8,20 +8,25 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.status(200).json(users)
 }
 export const createUsers = async (req: Request, res: Response) => {
-    const { email } = req.body;
+    const { nickname, email, name, picture } = req.body;
+
     const user = await prisma.user.findFirst({
         where: {
             email: email
         }
     })
     if (user) {
-        return res.send('User found')
+        return res.send('User already exists')
     }
-
     const newUser = await prisma.user.create({
-        data: req.body
+        data: {
+            email: email,
+            name: name,
+            nickname: nickname,
+            picture: picture
+        }
     })
-    res.status(201).json(newUser).send('User created')
+    res.status(201).send('User created');
 }
 export const updateUsers = (req: Request, res: Response) => {
     const userData = req.params;

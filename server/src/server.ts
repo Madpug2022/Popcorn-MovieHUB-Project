@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors())
 
-app.use("/", userRoutes);
+app.use("/users", userRoutes);
 app.use('/brands', brandRoutes);
 app.use('/genres', genreRoutes);
 

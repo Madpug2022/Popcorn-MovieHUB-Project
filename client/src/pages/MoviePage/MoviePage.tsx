@@ -41,41 +41,44 @@ const MoviePage = (props: PageType) => {
     }, []);
 
     return (
-        <main className="movie-page-container">
-            <div className='movie-pc-left'>
-                <div className='mpl-title'>
-                    <h2>{name}</h2>
-                    <button className="togle-watched-btn" onClick={() => setWatched(!watched)}>
-                        {watched ? (<AiFillEyeInvisible style={{ color: '#C41C19' }} />) : (<AiFillEye />)}
-                    </button>
-                </div>
-                {loadingGenres ? (
-                    <ClipLoader
-                        color={'#f1f1f1'}
-                        loading={loadingGenres}
-                        cssOverride={override}
-                        size={75}
-                    />
-                ) : (
-                    <div className='category-container'>
-                        {genresData.map(genres => (
-                            <button className='category-btn' value={genres.name} key={genres.id}>{genres.name}</button>
-                        ))}
+        <>
+            <main className="movie-page-container">
+                <div className='movie-pc-left'>
+                    <div className='mpl-title'>
+                        <h2>{name}</h2>
+                        <button className="togle-watched-btn" onClick={() => setWatched(!watched)}>
+                            {watched ? (<AiFillEyeInvisible style={{ color: '#C41C19' }} />) : (<AiFillEye />)}
+                        </button>
                     </div>
-                )}
-                {name === 'Movies' &&
-                    <UploadBtn>
-                        Upload Movie
-                    </UploadBtn>}
-                {name === 'Series' &&
-                    <UploadBtn>
-                        Upload Series
-                    </UploadBtn>}
-            </div>
-            <div className='movie-pc-right'>
+                    {loadingGenres ? (
+                        <ClipLoader
+                            color={'#f1f1f1'}
+                            loading={loadingGenres}
+                            cssOverride={override}
+                            size={75}
+                        />
+                    ) : (
+                        <div className='category-container'>
+                            {genresData.map(genres => (
+                                <button className='category-btn' value={genres.name} key={genres.id}>{genres.name}</button>
+                            ))}
+                        </div>
+                    )}
+                    {name === 'Movies' &&
+                        <UploadBtn>
+                            Upload Movie
+                        </UploadBtn>}
+                    {name === 'Series' &&
+                        <UploadBtn>
+                            Upload Series
+                        </UploadBtn>}
+                </div>
+                <div className='movie-pc-right'>
 
-            </div>
-        </main>
+                </div>
+
+            </main>
+        </>
     );
 };
 
