@@ -6,6 +6,7 @@ import { fetchData } from "../../api/fetchApi"
 import { SpinnerCircular } from 'spinners-react';
 import Publicity from "../../components/styled/Publicity";
 import premiumMember from '../../assets/resources/Premium-member.jpg'
+import { useAuth0 } from "@auth0/auth0-react"
 import * as images from '../../assets/resources/index'
 
 export interface BrandType {
@@ -48,6 +49,8 @@ const LazyBrandLogo = lazy(() => import('../../components/non-styled/BrandLogo/B
 const backgrounds: BackgroundsType = images
 
 const FeaturedPage = () => {
+    const { loginWithRedirect } = useAuth0()
+
     const [background, setBackground] = useState<string>(backgrounds.c1);
 
     function changeBackground() {
@@ -71,7 +74,7 @@ const FeaturedPage = () => {
                 <img src={logo} alt={`Logo for ${logo}`} />
                 <h1>If you can't enjoy it with Popcorn then you should forget it.</h1>
                 <h3>With Popcorn you can track a record of the movies and series you watch.<br /> Discover new ones. Share opinions and more.</h3>
-                <button>Join for free</button>
+                <button onClick={() => loginWithRedirect()}>Join for free</button>
                 <p>ENJOY YOUR SERIES ON</p>
                 <div>
                     {brands.map((brand) => {

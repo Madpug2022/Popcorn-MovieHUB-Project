@@ -4,13 +4,17 @@ import { useEffect } from "react";
 import Footer from "../components/styled/Footer";
 import './layout.css'
 import { useAuth0 } from "@auth0/auth0-react";
+import postApi from "../api/postApi";
+
+const url = 'http://localhost:8800/users'
 
 const Layout = () => {
     const { user } = useAuth0();
 
     useEffect(() => {
         if (user) {
-            console.log(user)
+            console.log(user);
+            postApi(url, user)
         }
     }, [user])
 
