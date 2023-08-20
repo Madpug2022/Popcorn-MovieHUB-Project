@@ -9,12 +9,12 @@ import postApi from "../api/postApi";
 const url = 'http://localhost:8800/users'
 
 const Layout = () => {
-    const { user } = useAuth0();
+    const { user, getAccessTokenSilently } = useAuth0();
 
     useEffect(() => {
         if (user) {
             console.log(user);
-            postApi(url, user)
+            postApi(url, user, getAccessTokenSilently)
         }
     }, [user])
 

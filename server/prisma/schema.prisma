@@ -27,13 +27,16 @@ model User {
 }
 
 model Movies {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  poster_image String
-  score        Int
-  genres       Genre[]
-  User         User    @relation(fields: [userId], references: [id])
-  userId       String  @db.ObjectId
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  poster_image    String
+  poster_image_id String
+  score           Int
+  critique        String
+  genre           Genre  @relation(fields: [genreId], references: [id])
+  User            User   @relation(fields: [userId], references: [id])
+  userId          String @db.ObjectId
+  genreId         String @db.ObjectId
 }
 
 model Series {
@@ -47,10 +50,10 @@ model Series {
 }
 
 model Genre {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  name     String  @unique
-  Movies   Movies? @relation(fields: [moviesId], references: [id])
-  moviesId String? @db.ObjectId
-  Series   Series? @relation(fields: [seriesId], references: [id])
-  seriesId String? @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String   @unique
+  moviesId String?  @db.ObjectId
+  Series   Series?  @relation(fields: [seriesId], references: [id])
+  seriesId String?  @db.ObjectId
+  Movies   Movies[]
 }

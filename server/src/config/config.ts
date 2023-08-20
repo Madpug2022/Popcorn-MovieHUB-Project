@@ -6,6 +6,7 @@ type TConfig = {
 type EnvironmentConfig = {
     app: AppConfig;
     auth0: AuthConfig;
+    cloudinary: CloudinaryConfig;
 }
 type AppConfig = {
     PORT: string | number;
@@ -14,6 +15,11 @@ type AuthConfig = {
     client_origin: string | undefined;
     audience: string | undefined;
     issuer: string | undefined;
+}
+type CloudinaryConfig = {
+    cloud: string | undefined;
+    apiKey: string | undefined;
+    apiSecret: string | undefined;
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -34,6 +40,11 @@ const CONFIG: TConfig = {
             audience: process.env.AUTH0_AUDIENCE,
             issuer: process.env.AUTH0_ISSUER,
         },
+        cloudinary: {
+            cloud: process.env.CLOUDINARY_CLOUD,
+            apiKey: process.env.CLOUDINARY_API_KEY,
+            apiSecret: process.env.CLOUDINARY_API_SECRERT,
+        },
     },
     production: {
         app: {
@@ -43,6 +54,11 @@ const CONFIG: TConfig = {
             client_origin: process.env.APP_ORIGIN,
             audience: process.env.AUTH0_AUDIENCE,
             issuer: process.env.AUTH0_ISSUER,
+        },
+        cloudinary: {
+            cloud: process.env.CLOUDINARY_CLOUD,
+            apiKey: process.env.CLOUDINARY_API_KEY,
+            apiSecret: process.env.CLOUDINARY_API_SECRERT,
         },
     }
 }

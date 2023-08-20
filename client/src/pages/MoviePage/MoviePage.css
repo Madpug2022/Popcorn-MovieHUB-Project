@@ -72,6 +72,7 @@
     flex-wrap: wrap;
     max-height: 100vh;
     overflow-y: scroll;
+    position: relative;
 }
 
 .movie-pc-right::-webkit-scrollbar {

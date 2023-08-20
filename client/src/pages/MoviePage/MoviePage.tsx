@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useParams } from "react-router-dom";
 import UploadBtn from "../../components/styled/UploadBtn";
 import MovieComponent from "../../components/styled/MovieComponent";
+import MediaModal from "../../components/styled/MediaModal";
 import './MoviePage.css'
 
 interface GenreType {
@@ -21,6 +22,9 @@ interface PageType {
 }
 
 const MoviePage = (props: PageType) => {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalData, setModalData] = useState<string>('');
+
     const { name } = props;
 
     const [watched, setWatched] = useState(false);
@@ -65,16 +69,16 @@ const MoviePage = (props: PageType) => {
                         </div>
                     )}
                     {name === 'Movies' &&
-                        <UploadBtn>
-                            Upload Movie
+                        <UploadBtn onClick={() => { setModalOpen(!modalOpen), setModalData('movies') }}>
+                            {modalOpen ? 'Close' : 'Upload Movie'}
                         </UploadBtn>}
                     {name === 'Series' &&
-                        <UploadBtn>
-                            Upload Series
+                        <UploadBtn onClick={() => { setModalOpen(!modalOpen), setModalData('series') }}>
+                            {modalOpen ? 'Close' : 'Upload Series'}
                         </UploadBtn>}
                 </div>
                 <div className='movie-pc-right'>
-
+                    {modalOpen && <MediaModal genresOptions={genresData} modalData={modalData} setModalOpen={setModalOpen} />}
                 </div>
 
             </main>

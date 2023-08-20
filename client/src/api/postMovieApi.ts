@@ -1,13 +1,21 @@
-const postApi = async (url: string, data: any, getToken: any) => {
+const postMovieApi = async (url: string, data: any, getToken: any) => {
     const token = await getToken();
+    const formData = new FormData();
+    formData.append("userEmail", data.userEmail);
+    formData.append("name", data.name);
+    formData.append("score", data.score);
+    formData.append("review", data.review);
+    formData.append("genres", data.genres);
+    formData.append("posterImage", data.posterImage);
+
+
     try {
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
             },
-            body: JSON.stringify(data),
+            body: formData,
         });
 
         if (response.ok) {
@@ -20,4 +28,4 @@ const postApi = async (url: string, data: any, getToken: any) => {
     }
 };
 
-export default postApi;
+export default postMovieApi;
