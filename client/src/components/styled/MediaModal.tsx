@@ -92,10 +92,32 @@ grid-template-columns: 65% 35%;
             z-index: 1;
             padding: 2px 5px;
         }
+        .scoreErrorMsg{
+            position: absolute;
+            background-color: #c41c19;
+            top: 35px;
+            left: 55px;
+            z-index: 1;
+            padding: 2px 5px;
+        }
+        .scoreErrorMsg::before{
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 11px solid #c41c19;
+            z-index: 1;
+            left: 0;
+            top: -10px;
+        }
+
         .offscreen{
             display:none;
         }
-        .errorMsg::before, .errorMsgReview::before{
+
+        .errorMsg::before, .errorMsgReview::before {
             position: absolute;
             content: '';
             width: 0;
@@ -171,7 +193,6 @@ const MediaModal = (props: any) => {
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files && event.target.files[0];
         if (selectedFile) {
-            console.log(selectedFile)
             setFormData((prevData) => ({
                 ...prevData,
                 posterImage: selectedFile,
@@ -198,6 +219,8 @@ const MediaModal = (props: any) => {
     const [validReview, setValidReview] = useState(false);
     const [reviewFocus, setReviewFocus] = useState(false);
 
+    const [scoreFocus, setScoreFocus] = useState(false);
+
     useEffect(() => {
         nameRef.current.focus();
     }, [])
@@ -208,7 +231,18 @@ const MediaModal = (props: any) => {
         if (formData.review == '' || formData.review == ' ') {
             setValidReview(false);
         } else setValidReview(true);
-    }, [formData.name, formData.review])
+        if (formData.score < 1) {
+            setFormData((prevData) => ({
+                ...prevData,
+                score: 1,
+            }));
+        } else if (formData.score > 10) {
+            setFormData((prevData) => ({
+                ...prevData,
+                score: 10,
+            }));
+        }
+    }, [formData.name, formData.review, formData.score]);
 
     let modalRef = useRef<HTMLDivElement>(null);
 
@@ -237,7 +271,18 @@ const MediaModal = (props: any) => {
                         </div>
                         <div>
                             <label htmlFor="score">Score</label>
-                            <input type="number" id="score" name="score" min="1" max="10" value={formData.score} onChange={handleInputChange} required />
+                            <input
+                                type="number"
+                                id="score"
+                                name="score"
+                                min="1"
+                                max="10"
+                                onFocus={() => setScoreFocus(true)}
+                                onBlur={() => setScoreFocus(false)}
+                                value={formData.score}
+                                onChange={handleInputChange}
+                                required />
+                            <p className={!scoreFocus ? "offscreen" : "scoreErrorMsg"}>The score should be between 1 and 10</p>
                             <span> Out of 10!</span>
                         </div>
                         <div>
@@ -252,13 +297,13 @@ const MediaModal = (props: any) => {
                                 autoComplete="off"
                                 onFocus={() => setReviewFocus(true)}
                                 onBlur={() => setReviewFocus(false)}
-                                maxLength={250}
+                                maxLength={2500}
                                 rows={2}
                                 cols={50}
                                 value={formData.review}
                                 onChange={handleInputChange}
                                 required />
-                            <p className={reviewFocus || validReview ? "offscreen" : "errorMsgReview"}>This field is required and max length is 250 characters</p>
+                            <p className={reviewFocus || validReview ? "offscreen" : "errorMsgReview"}>This field is required and max length is 2500 characters</p>
                         </div>
                         <div>
                             <label htmlFor="genres">Genre</label>

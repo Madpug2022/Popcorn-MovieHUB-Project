@@ -7,4 +7,6 @@ const movieRoutes = Router();
 
 movieRoutes.post('/', checkJwtMiddleware, createMovie);
 
+
+
 export default movieRoutes;

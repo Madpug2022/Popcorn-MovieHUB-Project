@@ -13,7 +13,6 @@ const Layout = () => {
 
     useEffect(() => {
         if (user) {
-            console.log(user);
             postApi(url, user, getAccessTokenSilently)
         }
     }, [user])

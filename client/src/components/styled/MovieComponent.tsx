@@ -6,8 +6,8 @@ interface MediaType {
     name: string
     poster_img: string
     score: number
-    genres: string[]
-    user: string
+    genres: string
+    user?: string
 }
 
 const StyledCard = styled.div<{ background: string }>`
@@ -50,11 +50,12 @@ const CardInfo = styled.div`
         .top p {
             font-size: 20px;
             font-weight: bold;
-            text-shadow: 0 0 40px rgba(0, 0, 0, 2)
+            text-shadow: 0 0 40px rgba(0, 0, 0, 2);
+            filter: invert(0) grayscale(1) contrast(9) drop-shadow(.05em .05em black);
         }
         .bottom {
             display: grid;
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 60% 40%;
         }
         .bottom .score-logo {
             display: flex;
@@ -75,7 +76,8 @@ const CardInfo = styled.div`
             justify-content: flex-end;
         }
         .score span{
-            text-shadow: 0 0 40px rgba(0, 0, 0, 2)
+            text-shadow: 0 0 40px rgba(0, 0, 0, 2);
+            filter: invert(0) grayscale(1) contrast(9) drop-shadow(.05em .05em black);
         }
         .score span:nth-child(1){
             font-size:40px;
