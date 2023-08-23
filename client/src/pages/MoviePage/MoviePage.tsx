@@ -6,6 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useParams } from "react-router-dom";
 import UploadBtn from "../../components/styled/UploadBtn";
 import MediaModal from "../../components/styled/MediaModal";
+import MovieDetailsModal from "../../components/styled/MovieDetailsModal";
 import './MoviePage.css'
 
 const LazyMovieComponent = lazy(() => import("../../components/styled/MovieComponent"))
@@ -14,7 +15,7 @@ interface GenreType {
     name: string;
     moviesId?: string[]
 }
-interface MovieType {
+export interface MovieType {
     id: string;
     name: string;
     poster_image: string;
@@ -66,6 +67,7 @@ const reducer = (filter: any, action: any) => {
 };
 const MoviePage = (props: PageType) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [detailsModal, setDetailsModal] = useState(false);
     const [modalData, setModalData] = useState<string>('');
 
     const { name } = props;
@@ -75,6 +77,7 @@ const MoviePage = (props: PageType) => {
     const [userMovies, setUserMovies] = useState<MovieType[]>([]);
     const [filter, dispatch] = useReducer(reducer, 'All');
     const [filteredMovies, setFilteredMovies] = useState<MovieType[]>([]);
+    const [movieData, setMovieData] = useState<MovieType[]>([]);
     const [loadingGenres, setLoadingGenres] = useState(false);
     const params = useParams();
 
@@ -126,11 +129,11 @@ const MoviePage = (props: PageType) => {
                         </div>
                     )}
                     {name === 'Movies' &&
-                        <UploadBtn onClick={() => { setModalOpen(!modalOpen), setModalData('movies') }}>
+                        <UploadBtn disabled={detailsModal ? true : false} onClick={() => { setModalOpen(!modalOpen), setModalData('movies') }}>
                             {modalOpen ? 'Close' : 'Upload Movie'}
                         </UploadBtn>}
                     {name === 'Series' &&
-                        <UploadBtn onClick={() => { setModalOpen(!modalOpen), setModalData('series') }}>
+                        <UploadBtn disabled={detailsModal ? true : false} onClick={() => { setModalOpen(!modalOpen), setModalData('series') }}>
                             {modalOpen ? 'Close' : 'Upload Series'}
                         </UploadBtn>}
                 </div>
@@ -139,13 +142,17 @@ const MoviePage = (props: PageType) => {
                         return (
                             <Suspense key={movie.id} fallback={<SpinnerCircular
                                 size={75}
-                                color="#f1f1f1" />}>
+                                color="#f1f1f1" />}
+                            >
                                 <LazyMovieComponent
                                     id={movie.id}
                                     genres={movie.genre.name}
                                     name={movie.name}
+                                    critique={movie.critique}
                                     poster_img={movie.poster_image}
                                     score={movie.score}
+                                    setDetailsModal={setDetailsModal}
+                                    setMovieData={setMovieData}
                                 />
 
                             </Suspense>
@@ -158,9 +165,12 @@ const MoviePage = (props: PageType) => {
                                 <LazyMovieComponent
                                     id={movie.id}
                                     genres={movie.genre.name}
+                                    critique={movie.critique}
                                     name={movie.name}
                                     poster_img={movie.poster_image}
                                     score={movie.score}
+                                    setDetailsModal={setDetailsModal}
+                                    setMovieData={setMovieData}
                                 />
 
                             </Suspense>
@@ -170,6 +180,7 @@ const MoviePage = (props: PageType) => {
                     )) : <></>
                     }
                     {modalOpen && <MediaModal genresOptions={genresData} modalData={modalData} setModalOpen={setModalOpen} />}
+                    {detailsModal && <MovieDetailsModal setDetailsModal={setDetailsModal} movieData={movieData} />}
                 </div>
 
             </main>

@@ -7,7 +7,10 @@ interface MediaType {
     poster_img: string
     score: number
     genres: string
+    critique: string
     user?: string
+    setDetailsModal: (state: boolean) => void
+    setMovieData: (object: any) => void
 }
 
 const StyledCard = styled.div<{ background: string }>`
@@ -90,13 +93,13 @@ const CardInfo = styled.div`
 `
 
 const MovieComponent = (props: MediaType) => {
-    const { name, poster_img, score } = props
+    const { name, poster_img, score, setDetailsModal, setMovieData } = props
 
     return (
         <StyledCard background={poster_img}>
-            <CardInfo>
+            <CardInfo onClick={() => { setDetailsModal(true); setMovieData(props) }}>
                 <div className="top"><p>{name}</p></div>
-                <div className="bottom">
+                <div className="bottom" >
                     <div className="score">
                         <span>{score}</span><span> out of 10</span>
                     </div>

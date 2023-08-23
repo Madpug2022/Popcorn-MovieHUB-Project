@@ -16,5 +16,9 @@ const UploadBtn = styled.button`
         box-shadow: 0 0 0px #000;
         background-color: #c41c19;
     }
+    &:disabled{
+        opacity: 0.5;
+        pointer-events: none;
+    }
 `
 export default UploadBtn
