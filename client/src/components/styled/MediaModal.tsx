@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import preview from '../../assets/resources/popcorn-ico.jpg'
 import { useAuth0 } from "@auth0/auth0-react";
 import postMovieApi from "../../api/postMovieApi";
+import { toast } from "react-toastify";
 
 
 
@@ -209,6 +210,7 @@ const MediaModal = (props: any) => {
         event.preventDefault();
         postMovieApi(`http://localhost:8800/${modalData}`, formData, getAccessTokenSilently);
         setModalOpen(false)
+        toast.success('Movie added sucesfully!')
     };
 
     const nameRef = useRef<any>();

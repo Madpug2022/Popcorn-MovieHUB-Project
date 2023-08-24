@@ -1,8 +1,15 @@
 import { styled } from "styled-components";
 import { RxCross2, RxTrash, RxPencil2 } from "react-icons/rx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
+import { useState, CSSProperties, useEffect } from "react";
+import { ClipLoader } from "react-spinners";
 import Notification from "./Notification";
+
+const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+};
 
 
 const MDBakground = styled.div`
@@ -140,19 +147,33 @@ const MovieDetailsModal = (props: MovieDetails) => {
     const { setDetailsModal, movieData } = props;
     const { user } = useAuth0();
     const [confirmDelete, setConfirmDelete] = useState(false);
+    const [editFormOpen, setEditFormOpen] = useState(false);
+    let [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false)
+        return (() => setLoading(true));
+    }, [movieData])
     return (
         <MDBakground>
             <MDContainer>
                 <div className="MD-top">
-                    <button className="MD-buttons" title="Edit"><RxPencil2 /></button>
+                    <button className="MD-buttons" title="Edit" onClick={() => setEditFormOpen(!editFormOpen)}><RxPencil2 /></button>
                     <button className="MD-buttons" onClick={() => setConfirmDelete(true)} title="Delete"><RxTrash /></button>
-                    {confirmDelete && <Notification setConfirmDelete={setConfirmDelete} />}
+                    {confirmDelete && <Notification setLoading={setLoading} setDetailsModal={setDetailsModal} setConfirmDelete={setConfirmDelete} id={movieData.id} />}
                     <button className="MD-buttons" title="Close" onClick={() => setDetailsModal(false)}><RxCross2 /></button>
                 </div>
                 <ReviewInfo background={movieData.poster_img} score={movieData.score}>
                     <div className="left">
 
-                        <section className="MD-info">
+                        {loading ? (<ClipLoader
+                            color={'#f1f1f1'}
+                            loading={loading}
+                            cssOverride={override}
+                            size={150}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />) : editFormOpen ? (<section className="MD-edit">EditForm</section>) : (<section className="MD-info">
                             <h2>User Review</h2>
 
                             <div>
@@ -161,7 +182,7 @@ const MovieDetailsModal = (props: MovieDetails) => {
                                 <p>{movieData.name}</p>
                             </div>
                             <p>{movieData.critique}</p>
-                        </section>
+                        </section>)}
                     </div>
                     <div className="right">
                         <div className="cover" />

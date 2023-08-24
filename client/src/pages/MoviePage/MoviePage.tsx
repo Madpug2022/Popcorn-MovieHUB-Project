@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import UploadBtn from "../../components/styled/UploadBtn";
 import MediaModal from "../../components/styled/MediaModal";
 import MovieDetailsModal from "../../components/styled/MovieDetailsModal";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './MoviePage.css'
 
 const LazyMovieComponent = lazy(() => import("../../components/styled/MovieComponent"))
@@ -138,6 +140,18 @@ const MoviePage = (props: PageType) => {
                         </UploadBtn>}
                 </div>
                 <div className='movie-pc-right'>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="colored"
+                    />
                     {name == 'Movies' ? (filter == 'All' ? (userMovies.map((movie) => {
                         return (
                             <Suspense key={movie.id} fallback={<SpinnerCircular

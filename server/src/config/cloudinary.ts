@@ -13,3 +13,7 @@ export const uploadImage = async (path: string) => {
         folder: 'Movies'
     })
 }
+
+export const deleteImage = async (publicId: string) => {
+    return await cloudinary.uploader.destroy(publicId)
+}

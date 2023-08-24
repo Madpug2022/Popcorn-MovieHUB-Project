@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { PrismaClient } from "@prisma/client";
-import { uploadImage } from "../config/cloudinary";
+import { uploadImage, deleteImage } from "../config/cloudinary";
 import fs from 'fs-extra';
 
 const prisma = new PrismaClient()
@@ -41,5 +41,23 @@ export const createMovie = async (req: Request, res: Response) => {
     } catch (err) {
         console.error("Error creating movie:", err);
         res.status(500).json({ err: "An error occurred while creating movie." });
+    }
+}
+
+export const deleteMovie = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.body;
+
+        const targetMovie = await prisma.movies.delete({ where: { id: id } })
+
+        if (!targetMovie) { res.status(404).send('No movie found') }
+        else
+
+            await deleteImage(targetMovie?.poster_image_id);
+
+        res.status(200).send('Movie deleted successfully')
+    } catch (err) {
+        console.error("Error deleting movie:", err);
+        res.status(500).json({ err: "An error occurred while deleting the movie." });
     }
 }

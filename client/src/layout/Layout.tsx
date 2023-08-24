@@ -6,6 +6,7 @@ import './layout.css'
 import { useAuth0 } from "@auth0/auth0-react";
 import postApi from "../api/postApi";
 
+
 const url = 'http://localhost:8800/users'
 
 const Layout = () => {

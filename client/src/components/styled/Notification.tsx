@@ -1,4 +1,9 @@
 import { styled } from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
+import deleteApi from "../../api/deleteApi";
+import { toast } from "react-toastify";
+
+const url = 'http://localhost:8800/movies'
 
 const StyledNotification = styled.section`
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -54,12 +59,22 @@ const StyledNotification = styled.section`
 `
 
 const Notification = (props: any) => {
-    const { setConfirmDelete } = props;
+    const { setLoading, setConfirmDelete, setDetailsModal, id } = props;
+    const { getAccessTokenSilently } = useAuth0();
+
+    const handleDelete = async () => {
+        setConfirmDelete(false);
+        setLoading(true);
+        await deleteApi(url, id, getAccessTokenSilently);
+        setDetailsModal(false);
+        toast.error('Movie deleted sucesfully!')
+    }
+
     return (
         <StyledNotification>
             <span>You want to remove this movie?</span>
             <div>
-                <button>Yes</button>
+                <button onClick={() => handleDelete()}>Yes</button>
                 <button onClick={() => setConfirmDelete(false)}>No</button>
             </div>
 
