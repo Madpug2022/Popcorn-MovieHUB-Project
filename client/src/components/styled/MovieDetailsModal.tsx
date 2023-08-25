@@ -3,6 +3,7 @@ import { RxCross2, RxTrash, RxPencil2 } from "react-icons/rx";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, CSSProperties, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
+import EditForm from "./Editform";
 import Notification from "./Notification";
 
 const override: CSSProperties = {
@@ -173,16 +174,19 @@ const MovieDetailsModal = (props: MovieDetails) => {
                             size={150}
                             aria-label="Loading Spinner"
                             data-testid="loader"
-                        />) : editFormOpen ? (<section className="MD-edit">EditForm</section>) : (<section className="MD-info">
-                            <h2>User Review</h2>
-
-                            <div>
-                                <p>{movieData.score}</p>
-                                <p>{user?.nickname}</p>
-                                <p>{movieData.name}</p>
-                            </div>
-                            <p>{movieData.critique}</p>
-                        </section>)}
+                        />) : editFormOpen ?
+                            (<section className="MD-info">
+                                <EditForm name={movieData.name} setDetailsModal={setDetailsModal} score={movieData.score} review={movieData.critique} id={movieData.id} setEditFormOpen={setEditFormOpen} />
+                            </section>) :
+                            (<section className="MD-info">
+                                <h2>User Review</h2>
+                                <div>
+                                    <p>{movieData.score}</p>
+                                    <p>{user?.nickname}</p>
+                                    <p>{movieData.name}</p>
+                                </div>
+                                <p>{movieData.critique}</p>
+                            </section>)}
                     </div>
                     <div className="right">
                         <div className="cover" />

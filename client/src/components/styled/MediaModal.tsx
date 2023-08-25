@@ -289,7 +289,13 @@ const MediaModal = (props: any) => {
                         </div>
                         <div>
                             <label htmlFor="posterImage">Cover:</label>
-                            <input type="file" id="posterImage" name="posterImage" accept="image/*" onChange={handleImageChange} required />
+                            <input
+                                type="file"
+                                id="posterImage"
+                                name="posterImage"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                required />
                         </div>
                         <div>
                             <label htmlFor="review">Review</label>

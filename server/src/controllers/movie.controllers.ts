@@ -61,3 +61,27 @@ export const deleteMovie = async (req: Request, res: Response) => {
         res.status(500).json({ err: "An error occurred while deleting the movie." });
     }
 }
+
+export const editMovie = async (req: Request, res: Response) => {
+    try {
+        const { id, name, review, score } = req.body;
+
+        const updatedMovie = await prisma.movies.update({
+            where: {
+                id: id,
+            },
+            data: {
+                name: name,
+                score: parseInt(score),
+                critique: review
+            }
+        })
+        if (updatedMovie) {
+            res.status(200).send('Movie updated successfully')
+        }
+
+    } catch (err) {
+        console.error("Error editing movie:", err);
+        res.status(500).json({ err: "An error occurred while editing the movie." });
+    }
+}
