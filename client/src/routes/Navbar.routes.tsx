@@ -20,6 +20,11 @@ const NavbarRoutes = () => {
                         <Route path="/series/:id" element={<MoviePage name={'Series'} />} />
                     </Route>
                     <Route path='/login' element={<Login />} />
+                    <Route path='/popcorn' element={<div>popcorn</div>} />
+                    <Route path='/FAQ' element={<div>FAQ</div>} />
+                    <Route path='/searchPage' element={<div>Searchpage</div>} />
+                    <Route path="/search/:id" element={<MoviePage name={'All'} />} />
+                    <Route path='/*' element={<div>404 not found</div>} />
                 </Routes>
             </BrowserRouter>
         </>

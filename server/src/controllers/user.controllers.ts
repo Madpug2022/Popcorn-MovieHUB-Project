@@ -61,6 +61,21 @@ export const getUserByNickname = async (req: Request, res: Response) => {
                         }
                     }
                 },
+                series: {
+                    select: {
+                        id: true,
+                        name: true,
+                        score: true,
+                        critique: true,
+                        poster_image: true,
+                        poster_image_id: true,
+                        genre: {
+                            select: {
+                                name: true
+                            }
+                        }
+                    }
+                },
             }
         })
         res.status(200).json(user);

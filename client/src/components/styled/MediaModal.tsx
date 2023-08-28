@@ -205,12 +205,11 @@ const MediaModal = (props: any) => {
             reader.readAsDataURL(selectedFile);
         }
     };
-
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         postMovieApi(`http://localhost:8800/${modalData}`, formData, getAccessTokenSilently);
         setModalOpen(false)
-        toast.success('Movie added sucesfully!')
+        toast.success('Media added sucesfully!')
     };
 
     const nameRef = useRef<any>();

@@ -28,12 +28,12 @@ const NavBar = () => {
     const linksRight = useMemo(() => [
         {
             id: 1,
-            to: '/login',
+            to: '/popcorn',
             name: 'Hungry?'
         },
         {
             id: 2,
-            to: '/login',
+            to: '/FAQ',
             name: 'FAQs'
         }
     ], []);
@@ -77,7 +77,7 @@ const NavBar = () => {
                     {linksRight.map(link => {
                         return (
                             <li key={link.id}>
-                                <Link className='nav-link' to={link.to}>{link.name}</Link>
+                                <Link className='nav-link' to={link.to} onClick={() => { setNotOnMain(true) }}>{link.name}</Link>
                             </li>
                         )
                     })}

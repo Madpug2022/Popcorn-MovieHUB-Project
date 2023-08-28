@@ -4,13 +4,12 @@ import editApi from "../../api/editApi";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
 
-const url = 'http://localhost:8800/movies';
-
 interface FormData {
     name: string
     score: number
     review: string
     id: string
+    modalData: string;
     setDetailsModal: (state: boolean) => void
     setEditFormOpen?: (state: boolean) => void
 }
@@ -52,15 +51,16 @@ const StyledForm = styled.form`
 `
 const EditForm = (props: FormData) => {
 
-    const { name, score, review, setEditFormOpen, id, setDetailsModal } = props
+    const { name, score, review, setEditFormOpen, id, setDetailsModal, modalData } = props
     const { formState: { errors }, register, handleSubmit } = useForm({ defaultValues: { name, score, review } })
     const { getAccessTokenSilently } = useAuth0()
 
     const onSubmit = async (data: any) => {
+        const url = `http://localhost:8800/${modalData}`
         setEditFormOpen!(false)
         setDetailsModal(false)
         await editApi(url, id, data, getAccessTokenSilently);
-        toast.success('Movie edited successfully!')
+        toast.success('Media edited successfully!')
     }
 
     return (

@@ -34,7 +34,7 @@ const StyledCard = styled.div<{ background: string }>`
 `
 const CardInfo = styled.div`
     position: absolute;
-    bottom: 0;
+    bottom: -1px;
     width: 100%;
     height: 25%;
     display: grid;
@@ -64,6 +64,7 @@ const CardInfo = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
             height: 8vh;
         }
         .bottom img {

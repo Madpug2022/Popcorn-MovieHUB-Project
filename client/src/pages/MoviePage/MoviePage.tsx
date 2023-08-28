@@ -1,4 +1,3 @@
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useState, useEffect, CSSProperties, lazy, Suspense, useReducer } from "react";
 import { SpinnerCircular } from 'spinners-react';
 import { fetchData } from "../../api/fetchApi";
@@ -74,11 +73,15 @@ const MoviePage = (props: PageType) => {
 
     const { name } = props;
 
-    const [watched, setWatched] = useState(false);
+
     const [genresData, setGenresData] = useState<GenreType[]>([]);
     const [userMovies, setUserMovies] = useState<MovieType[]>([]);
+    const [userSeries, setUserSeries] = useState<MovieType[]>([]);
+    const [combinedMedia, setCombinedMedia] = useState<MovieType[]>([]);
     const [filter, dispatch] = useReducer(reducer, 'All');
     const [filteredMovies, setFilteredMovies] = useState<MovieType[]>([]);
+    const [filteredSeries, setFilteredSeries] = useState<MovieType[]>([]);
+    const [filteredCombined, setFilteredCombined] = useState<MovieType[]>([]);
     const [movieData, setMovieData] = useState<MovieType[]>([]);
     const [loadingGenres, setLoadingGenres] = useState(false);
     const params = useParams();
@@ -94,6 +97,8 @@ const MoviePage = (props: PageType) => {
         const fetchMovies = async () => {
             const data = await fetchData(`users/${params.id}`);
             setUserMovies(data.movies);
+            setUserSeries(data.series);
+            setCombinedMedia([...data.movies, ...data.series]);
         }
         fetchMovies();
         const fetchInterval = setInterval(() => fetchMovies(), 5000);
@@ -103,6 +108,8 @@ const MoviePage = (props: PageType) => {
 
     useEffect(() => {
         setFilteredMovies(userMovies.filter((movie) => movie.genre.name == filter));
+        setFilteredSeries(userSeries.filter((series) => series.genre.name == filter));
+        setFilteredCombined(combinedMedia.filter((combined) => combined.genre.name == filter));
     }, [filter])
 
     return (
@@ -111,9 +118,6 @@ const MoviePage = (props: PageType) => {
                 <div className='movie-pc-left'>
                     <div className='mpl-title'>
                         <h2>{name}</h2>
-                        <button className="togle-watched-btn" onClick={() => setWatched(!watched)}>
-                            {watched ? (<AiFillEyeInvisible style={{ color: '#C41C19' }} />) : (<AiFillEye />)}
-                        </button>
                     </div>
                     {loadingGenres ? (
                         <ClipLoader
@@ -191,10 +195,89 @@ const MoviePage = (props: PageType) => {
                         )
                     })
 
-                    )) : <></>
+                    )) : name == 'Series' ?
+                        (filter == 'All' ? (userSeries.map((movie) => {
+                            return (
+                                <Suspense key={movie.id} fallback={<SpinnerCircular
+                                    size={75}
+                                    color="#f1f1f1" />}
+                                >
+                                    <LazyMovieComponent
+                                        id={movie.id}
+                                        genres={movie.genre.name}
+                                        name={movie.name}
+                                        critique={movie.critique}
+                                        poster_img={movie.poster_image}
+                                        score={movie.score}
+                                        setDetailsModal={setDetailsModal}
+                                        setMovieData={setMovieData}
+                                    />
+
+                                </Suspense>
+                            )
+                        })) : (filteredSeries.map((movie) => {
+                            return (
+                                <Suspense key={movie.id} fallback={<SpinnerCircular
+                                    size={75}
+                                    color="#f1f1f1" />}>
+                                    <LazyMovieComponent
+                                        id={movie.id}
+                                        genres={movie.genre.name}
+                                        critique={movie.critique}
+                                        name={movie.name}
+                                        poster_img={movie.poster_image}
+                                        score={movie.score}
+                                        setDetailsModal={setDetailsModal}
+                                        setMovieData={setMovieData}
+                                    />
+
+                                </Suspense>
+                            )
+                        })
+
+                        )) : (filter == 'All' ? (combinedMedia.map((movie) => {
+                            return (
+                                <Suspense key={movie.id} fallback={<SpinnerCircular
+                                    size={75}
+                                    color="#f1f1f1" />}
+                                >
+                                    <LazyMovieComponent
+                                        id={movie.id}
+                                        genres={movie.genre.name}
+                                        name={movie.name}
+                                        critique={movie.critique}
+                                        poster_img={movie.poster_image}
+                                        score={movie.score}
+                                        setDetailsModal={setDetailsModal}
+                                        setMovieData={setMovieData}
+                                    />
+
+                                </Suspense>
+                            )
+                        })) : (filteredCombined.map((movie) => {
+                            return (
+                                <Suspense key={movie.id} fallback={<SpinnerCircular
+                                    size={75}
+                                    color="#f1f1f1" />}>
+                                    <LazyMovieComponent
+                                        id={movie.id}
+                                        genres={movie.genre.name}
+                                        critique={movie.critique}
+                                        name={movie.name}
+                                        poster_img={movie.poster_image}
+                                        score={movie.score}
+                                        setDetailsModal={setDetailsModal}
+                                        setMovieData={setMovieData}
+                                    />
+
+                                </Suspense>
+                            )
+                        })
+
+                        ))
                     }
                     {modalOpen && <MediaModal genresOptions={genresData} modalData={modalData} setModalOpen={setModalOpen} />}
-                    {detailsModal && <MovieDetailsModal setDetailsModal={setDetailsModal} movieData={movieData} />}
+                    {detailsModal && <MovieDetailsModal modalData={name} setDetailsModal={setDetailsModal} movieData={movieData} />}
                 </div>
 
             </main>

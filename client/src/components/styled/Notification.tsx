@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import deleteApi from "../../api/deleteApi";
 import { toast } from "react-toastify";
 
-const url = 'http://localhost:8800/movies'
+
 
 const StyledNotification = styled.section`
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -59,15 +59,16 @@ const StyledNotification = styled.section`
 `
 
 const Notification = (props: any) => {
-    const { setLoading, setConfirmDelete, setDetailsModal, id } = props;
+    const { setLoading, setConfirmDelete, setDetailsModal, id, modalData } = props;
     const { getAccessTokenSilently } = useAuth0();
 
     const handleDelete = async () => {
+        const url = `http://localhost:8800/${modalData}`
         setConfirmDelete(false);
         setLoading(true);
         await deleteApi(url, id, getAccessTokenSilently);
         setDetailsModal(false);
-        toast.error('Movie deleted sucesfully!')
+        toast.error('Media deleted sucesfully!')
     }
 
     return (

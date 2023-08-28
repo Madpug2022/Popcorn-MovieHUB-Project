@@ -3,6 +3,7 @@ import userRoutes from './routes/user.routes';
 import brandRoutes from './routes/brand.routes';
 import genreRoutes from './routes/genre.routes';
 import movieRoutes from './routes/movie.routes';
+import serieRoutes from './routes/series.routes';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -24,5 +25,6 @@ app.use("/users", userRoutes);
 app.use('/brands', brandRoutes);
 app.use('/genres', genreRoutes);
 app.use('/movies', movieRoutes);
+app.use('/series', serieRoutes);
 
 export default app;

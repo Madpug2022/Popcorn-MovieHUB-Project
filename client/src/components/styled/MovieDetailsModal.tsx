@@ -142,10 +142,11 @@ const ReviewInfo = styled.div<{ background: string, score: string }>`
 interface MovieDetails {
     setDetailsModal: (state: boolean) => void;
     movieData: any;
+    modalData: string;
 }
 
 const MovieDetailsModal = (props: MovieDetails) => {
-    const { setDetailsModal, movieData } = props;
+    const { setDetailsModal, movieData, modalData } = props;
     const { user } = useAuth0();
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [editFormOpen, setEditFormOpen] = useState(false);
@@ -159,9 +160,9 @@ const MovieDetailsModal = (props: MovieDetails) => {
         <MDBakground>
             <MDContainer>
                 <div className="MD-top">
-                    <button className="MD-buttons" title="Edit" onClick={() => setEditFormOpen(!editFormOpen)}><RxPencil2 /></button>
-                    <button className="MD-buttons" onClick={() => setConfirmDelete(true)} title="Delete"><RxTrash /></button>
-                    {confirmDelete && <Notification setLoading={setLoading} setDetailsModal={setDetailsModal} setConfirmDelete={setConfirmDelete} id={movieData.id} />}
+                    {modalData == 'All' ? <><button className="MD-buttons" title="Edit" onClick={() => setEditFormOpen(!editFormOpen)}><RxPencil2 /></button>
+                        <button className="MD-buttons" onClick={() => setConfirmDelete(true)} title="Delete"><RxTrash /></button></> : <></>}
+                    {confirmDelete && <Notification modalData={modalData} setLoading={setLoading} setDetailsModal={setDetailsModal} setConfirmDelete={setConfirmDelete} id={movieData.id} />}
                     <button className="MD-buttons" title="Close" onClick={() => setDetailsModal(false)}><RxCross2 /></button>
                 </div>
                 <ReviewInfo background={movieData.poster_img} score={movieData.score}>
@@ -176,7 +177,7 @@ const MovieDetailsModal = (props: MovieDetails) => {
                             data-testid="loader"
                         />) : editFormOpen ?
                             (<section className="MD-info">
-                                <EditForm name={movieData.name} setDetailsModal={setDetailsModal} score={movieData.score} review={movieData.critique} id={movieData.id} setEditFormOpen={setEditFormOpen} />
+                                <EditForm name={movieData.name} modalData={modalData} setDetailsModal={setDetailsModal} score={movieData.score} review={movieData.critique} id={movieData.id} setEditFormOpen={setEditFormOpen} />
                             </section>) :
                             (<section className="MD-info">
                                 <h2>User Review</h2>
