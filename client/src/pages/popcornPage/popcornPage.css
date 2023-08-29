@@ -1,0 +1,78 @@
+.popcorn-page {
+    width: 100%;
+    height: 100vh;
+    padding: 6.5vh 2vw 0 2vw;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 10% 1fr;
+}
+
+.popc-logo {
+    grid-column: 2;
+    grid-row: 1/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popc-logo img {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #f1f1f135;
+    transition-duration: 500ms;
+}
+
+.popc-logo img:hover {
+    box-shadow: 0 0 20px #f1f1f1;
+}
+
+.popc-searchbar {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    padding: 1vh;
+    background: #f1f1f1;
+    justify-content: center;
+    margin: auto;
+    transition: background-color 0.3s;
+}
+
+.popc-searchbar input {
+    width: 100%;
+    border: none;
+}
+
+.focused {
+    background: #C41C19;
+}
+
+.popc-c-container {
+    margin: 0 1vh;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
+
+.popc-container {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    overflow-y: scroll;
+}
+
+.popc-container::-webkit-scrollbar {
+    display: none;
+}
+
+.popc-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.popc-btn-container p {
+    font-size: 14px;
+    text-shadow: 0 0 5px #ffffffb9;
+    pointer-events: none;
+    font-weight: 600;
+}

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from '../components/non-styled/NavBar/NavBar';
 import FeaturedPage from '../pages/FeaturedPage/FeaturedPage';
 import MoviePage from '../pages/MoviePage/MoviePage';
+import PopCornPage from '../pages/popcornPage/PopcornPage';
 import Login from '../pages/LoginPage/Login';
 import PrivateRoute from '../components/non-styled/PrivateRoutes/PrivateRoute';
 
@@ -20,7 +21,7 @@ const NavbarRoutes = () => {
                         <Route path="/series/:id" element={<MoviePage name={'Series'} />} />
                     </Route>
                     <Route path='/login' element={<Login />} />
-                    <Route path='/popcorn' element={<div>popcorn</div>} />
+                    <Route path='/popcorn' element={<PopCornPage />} />
                     <Route path='/FAQ' element={<div>FAQ</div>} />
                     <Route path='/searchPage' element={<div>Searchpage</div>} />
                     <Route path="/search/:id" element={<MoviePage name={'All'} />} />

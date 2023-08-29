@@ -160,7 +160,7 @@ const MovieDetailsModal = (props: MovieDetails) => {
         <MDBakground>
             <MDContainer>
                 <div className="MD-top">
-                    {modalData == 'All' ? <><button className="MD-buttons" title="Edit" onClick={() => setEditFormOpen(!editFormOpen)}><RxPencil2 /></button>
+                    {modalData !== 'All' ? <><button className="MD-buttons" title="Edit" onClick={() => setEditFormOpen(!editFormOpen)}><RxPencil2 /></button>
                         <button className="MD-buttons" onClick={() => setConfirmDelete(true)} title="Delete"><RxTrash /></button></> : <></>}
                     {confirmDelete && <Notification modalData={modalData} setLoading={setLoading} setDetailsModal={setDetailsModal} setConfirmDelete={setConfirmDelete} id={movieData.id} />}
                     <button className="MD-buttons" title="Close" onClick={() => setDetailsModal(false)}><RxCross2 /></button>

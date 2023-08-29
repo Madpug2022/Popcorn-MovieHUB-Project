@@ -13,6 +13,7 @@ export const createMovie = async (req: Request, res: Response) => {
             const upload = await uploadImage((req.files as any).posterImage.tempFilePath);
 
             await fs.unlink((req.files as any).posterImage.tempFilePath)
+
             const user = await prisma.user.findFirst({
                 where: {
                     email: userEmail
