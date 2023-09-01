@@ -1,5 +1,7 @@
-import { styled, keyframes } from "styled-components"
+import { styled, keyframes } from "styled-components";
 import { PiMagnifyingGlassFill } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import react, { useState } from "react";
 
 const openAnimation = keyframes`
     0% { opacity: 0 }
@@ -45,12 +47,20 @@ width: 50vh;
 `
 
 
-const SearchInput = () => {
+const SearchInput = (props: any) => {
+    const { setNotOnMain } = props;
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = (event: react.FormEvent) => {
+        event.preventDefault();
+        navigate('/searchPage', { state: { searchQuery } })
+    }
     return (
         <StyledSearchBar>
-            <StyledForm>
-                <StyledInput placeholder="Search user" />
-                <button type="submit">
+            <StyledForm onSubmit={handleSubmit}>
+                <StyledInput placeholder="Search user" value={searchQuery} onChange={(event) => setSearchQuery(event?.target.value)} />
+                <button type="submit" onClick={setNotOnMain(true)}>
                     <PiMagnifyingGlassFill />
                 </button>
             </StyledForm>

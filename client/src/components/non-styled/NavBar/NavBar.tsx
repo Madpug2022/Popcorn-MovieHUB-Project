@@ -60,7 +60,7 @@ const NavBar = () => {
     return (
         <nav className="navigation-bar" style={isScrolled || notOnMain ? { backgroundColor: 'black' } : { backgroundColor: '' }}>
             <div className='left-nav'>
-                <SearchButton />
+                <SearchButton setNotOnMain={setNotOnMain} />
             </div>
             <div className="center-nav">
                 <ul className='nav-links'>

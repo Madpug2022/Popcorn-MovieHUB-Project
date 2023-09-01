@@ -4,6 +4,7 @@ import brandRoutes from './routes/brand.routes';
 import genreRoutes from './routes/genre.routes';
 import movieRoutes from './routes/movie.routes';
 import serieRoutes from './routes/series.routes';
+import recipeRoutes from './routes/recipe.routes';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -26,5 +27,6 @@ app.use('/brands', brandRoutes);
 app.use('/genres', genreRoutes);
 app.use('/movies', movieRoutes);
 app.use('/series', serieRoutes);
+app.use('/recipes', recipeRoutes);
 
 export default app;

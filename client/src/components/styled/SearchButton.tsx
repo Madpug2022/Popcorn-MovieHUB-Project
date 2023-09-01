@@ -19,15 +19,15 @@ const StyledSearchContainer = styled.div`
     align-items: center;
 `
 
-const SearchButton = () => {
+const SearchButton = (props: any) => {
     const [open, setOpen] = useState(false);
-
+    const { setNotOnMain } = props;
     return (
         <StyledSearchContainer>
-            <StyledSBtn onClick={() => setOpen(!open)} open={open} >
+            <StyledSBtn onClick={() => { setOpen(!open) }} open={open} >
                 <PiMagnifyingGlassFill />
             </StyledSBtn>
-            {open && <SearchInput />}
+            {open && <SearchInput setNotOnMain={setNotOnMain} />}
         </StyledSearchContainer>
     )
 }

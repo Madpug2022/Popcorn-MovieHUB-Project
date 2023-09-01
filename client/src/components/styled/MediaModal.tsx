@@ -193,6 +193,7 @@ const MediaModal = (props: any) => {
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files && event.target.files[0];
+
         if (selectedFile) {
             setFormData((prevData) => ({
                 ...prevData,
