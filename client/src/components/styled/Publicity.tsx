@@ -27,12 +27,18 @@ const PublicityImage = styled.img<{ order: string }>`
   margin: auto 20px;
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
   transform: ${props => (props.order === 'row' ? 'rotate(-8deg)' : 'rotate(8deg)')};
+  @media (max-width: 768px) {
+    height: 10vh
+  }
 `;
 
 const PublicityRight = styled.div`
   width: 40vw;
   margin: auto 40px;
   text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const Publicity = (props: PublicityType) => {

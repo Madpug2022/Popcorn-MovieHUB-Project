@@ -87,12 +87,17 @@ const FeaturedWrapper = styled.section<{ background: string }>`
     @media (max-width: 768px) {
        h1{
         font-size: 1.5em;
+        text-align:center;
 
        }
        h3{
         font-size: 1em;
        }
-
+       img:nth-of-type(1) {
+        height: 14vh;
+        padding: 3vh;
+        border-bottom: 1px solid gray;
+    }
   }
 `
 

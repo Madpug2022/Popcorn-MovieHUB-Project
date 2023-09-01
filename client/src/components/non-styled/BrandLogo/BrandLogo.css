@@ -11,3 +11,11 @@
 .brand-Link-Wrapper {
     transition-duration: 500ms;
 }
+
+@media (max-width: 768px) {
+    .brand-img {
+        border: none !important;
+        height: 60px !important;
+        padding: 10px !important;
+    }
+}

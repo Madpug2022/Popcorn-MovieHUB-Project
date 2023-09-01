@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
-import { PrismaClient } from "@prisma/client";
+import { prismaClient } from '../config/prismaClient'
 
-const prisma = new PrismaClient()
+const prisma = prismaClient
 
 export const createRecipe = async (req: Request, res: Response) => {
     try {

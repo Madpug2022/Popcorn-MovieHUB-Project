@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
-import { PrismaClient } from "@prisma/client";
 import { uploadImage, deleteImage } from "../config/cloudinary";
 import fs from 'fs-extra';
+import { prismaClient } from '../config/prismaClient'
 
-const prisma = new PrismaClient()
+const prisma = prismaClient
 
 export const createSerie = async (req: Request, res: Response) => {
     try {
