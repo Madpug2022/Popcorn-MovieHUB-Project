@@ -23,9 +23,8 @@ const Layout = () => {
 
             <NavbarRoutes />
             <Outlet />
-            <footer>
-                <Footer />
-            </footer>
+            <Footer />
+
         </>
     )
 }

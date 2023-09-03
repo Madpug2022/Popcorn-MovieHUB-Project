@@ -12,6 +12,10 @@ const PublicitySection = styled.section<{ background: string }>`
   justify-content: center;
   background-color: ${props => props.background};
   box-shadow: inset 1px 1px 150px black;
+
+  @media (max-width: 768px) {
+    display:none;
+  }
 `;
 
 const PublicityContainer = styled.div<{ order: string }>`

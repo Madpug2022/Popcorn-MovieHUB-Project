@@ -7,6 +7,9 @@ const StyledFooterContainer = styled.div`
     width: 100%;
     height: 20vh;
     background-color: black;
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 const StyledFCTop = styled.div`
     display:flex;
@@ -100,30 +103,37 @@ const SignatureBtn = styled.button`
     content: 'MADE BY';
     transform: translateY(0) rotateX(0);
   }
+  @media (max-width: 768px) {
+
+    display: none;
+
+  }
 `
 const fLinks: string[] = ['About', 'Forums', 'FAQs', 'Terms', 'Privacy'];
 const Footer = () => {
     return (
-        <StyledFooterContainer>
-            <StyledFCTop>
-                {fLinks.map((link) => {
-                    return (
-                        <StyledFLink key={link} href="/" target="_blank">{link}</StyledFLink>)
-                })}
-                <div>
-                    <StyledFLink href="/" target="_blank"><AiFillGithub /></StyledFLink>
-                    <StyledFLink href="/" target="_blank"><AiFillInstagram /></StyledFLink>
-                    <StyledFLink href="/" target="_blank"><AiFillLinkedin /></StyledFLink>
-                    <StyledFLink href="/" target="_blank"><AiFillTwitterCircle /></StyledFLink>
-                </div>
-            </StyledFCTop>
-            <StyledFCBottom>
-                <img src={logo} alt="Logo" />
-                <p>© 2023 Popcorn, inc. All rights reserved.
-                    Hand crafted in Westeros and distributed in Highgarden Area.</p>
-                <SignatureBtn />
-            </StyledFCBottom>
-        </StyledFooterContainer>
+        <footer>
+            <StyledFooterContainer>
+                <StyledFCTop>
+                    {fLinks.map((link) => {
+                        return (
+                            <StyledFLink key={link} href="/" target="_blank">{link}</StyledFLink>)
+                    })}
+                    <div>
+                        <StyledFLink href="https://github.com/Madpug2022" target="_blank"><AiFillGithub /></StyledFLink>
+                        <StyledFLink href="https://www.instagram.com/matias.chiappa/" target="_blank"><AiFillInstagram /></StyledFLink>
+                        <StyledFLink href="https://www.linkedin.com/in/matias-alaimo-chiappa-910560230/" target="_blank"><AiFillLinkedin /></StyledFLink>
+                        <StyledFLink href="https://twitter.com/?lang=es" target="_blank"><AiFillTwitterCircle /></StyledFLink>
+                    </div>
+                </StyledFCTop>
+                <StyledFCBottom>
+                    <img src={logo} alt="Logo" />
+                    <p>© 2023 Popcorn, inc. All rights reserved.
+                        Hand crafted in Westeros and distributed in Highgarden Area.</p>
+                    <SignatureBtn />
+                </StyledFCBottom>
+            </StyledFooterContainer>
+        </footer>
     )
 }
 

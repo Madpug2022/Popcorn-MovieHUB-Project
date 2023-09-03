@@ -85,6 +85,7 @@ const FeaturedWrapper = styled.section<{ background: string }>`
         display: flex;
     }
     @media (max-width: 768px) {
+
        h1{
         font-size: 1.5em;
         text-align:center;

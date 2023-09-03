@@ -4,7 +4,9 @@ import FeaturedPage from '../pages/FeaturedPage/FeaturedPage';
 import MoviePage from '../pages/MoviePage/MoviePage';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import PopCornPage from '../pages/popcornPage/PopcornPage';
+import FaqPage from '../pages/FAQPage/Faq';
 import Login from '../pages/LoginPage/Login';
+import NotFoundPage from '../pages/404page/NotFoundPage';
 import PrivateRoute from '../components/non-styled/PrivateRoutes/PrivateRoute';
 
 const NavbarRoutes = () => {
@@ -23,10 +25,10 @@ const NavbarRoutes = () => {
                     </Route>
                     <Route path='/login' element={<Login />} />
                     <Route path='/popcorn' element={<PopCornPage />} />
-                    <Route path='/FAQ' element={<div>FAQ</div>} />
+                    <Route path='/FAQ' element={<FaqPage />} />
                     <Route path='/searchPage' element={<SearchPage />} />
                     <Route path="/search/:id" element={<MoviePage name={'All'} />} />
-                    <Route path='/*' element={<div>404 not found</div>} />
+                    <Route path='/*' element={<NotFoundPage />} />
                 </Routes>
             </BrowserRouter>
         </>
