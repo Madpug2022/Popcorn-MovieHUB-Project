@@ -6,6 +6,7 @@ import { PiPersonArmsSpreadBold } from "react-icons/pi";
 import SearchButton from '../../styled/SearchButton';
 import { useAuth0 } from "@auth0/auth0-react";
 import { SpinnerCircular } from 'spinners-react';
+import { BiSolidHome } from "react-icons/bi"
 
 const NavBar = () => {
     const { loginWithRedirect, isAuthenticated, logout, user, isLoading } = useAuth0()
@@ -72,8 +73,9 @@ const NavBar = () => {
                         )
                     })}
                 </ul>
-                <img src={logo} alt='logo-popcorn' onClick={() => { navigate('/'); setNotOnMain(false) }} style={isScrolled || notOnMain ? { display: 'block' } : { display: 'none' }} />
-                <ul className='nav-links'>
+                <img src={logo} alt='logo-popcorn' className='responsive-hidden' onClick={() => { navigate('/'); setNotOnMain(false) }} style={isScrolled || notOnMain ? { display: 'block' } : { display: 'none' }} />
+                <button className='nav-link responsive-not-hidden' onClick={() => navigate('/')} style={{ border: 'none', background: 'none', color: '#f1f1f1' }}><BiSolidHome /></button>
+                <ul className='nav-links responsive-hidden'>
                     {linksRight.map(link => {
                         return (
                             <li key={link.id}>

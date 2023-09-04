@@ -26,6 +26,12 @@ background-repeat: no-repeat;
 -moz-box-shadow: 0px 0px 46px -5px rgba(255,255,255,0.51);
 box-shadow: 0px 0px 46px -5px rgba(255,255,255,0.51);
 border-radius: 12px;
+@media (max-width: 768px) {
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
 `;
 const ModalContainer = styled.div`
 padding: 10px;
@@ -153,6 +159,26 @@ grid-template-columns: 65% 35%;
             pointer-events: none;
         }
     }
+    @media (max-width: 768px) {
+        height: 100vh;
+        width: 100%;
+        grid-template-columns: 100%;
+        .modal-cont-rigth{
+            display: none;
+        }
+        p{
+            display: none;
+        }
+        h2{
+            font-size: 22px;
+            padding: 0;
+            margin: 0;
+        }
+        label{
+            font-size: 14px
+        }
+    }
+
 `
 interface MovieReview {
     userEmail?: string;

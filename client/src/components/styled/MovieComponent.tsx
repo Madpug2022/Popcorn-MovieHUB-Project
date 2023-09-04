@@ -31,6 +31,10 @@ const StyledCard = styled.div<{ background: string }>`
         background-size: cover;
         background-position: bottom center;
     }
+    @media (max-width: 768px){
+        width: 100%;
+        margin-bottom: 1vh;
+    }
 `
 const CardInfo = styled.div`
     position: absolute;

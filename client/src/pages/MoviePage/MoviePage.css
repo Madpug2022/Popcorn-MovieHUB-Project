@@ -90,3 +90,19 @@
 .movie-pc-right::-webkit-scrollbar {
     display: none;
 }
+
+@media (max-width: 768px) {
+    .movie-page-container {
+        padding-top: 0;
+        grid-template-columns: 40% 60%;
+    }
+
+    .category-btn {
+        height: 4vh;
+        cursor: pointer;
+        margin: 2px 0;
+        font-size: 14px;
+        font-weight: 600;
+        transition-duration: 500ms;
+    }
+}

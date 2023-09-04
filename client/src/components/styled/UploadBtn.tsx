@@ -20,5 +20,9 @@ const UploadBtn = styled.button`
         opacity: 0.5;
         pointer-events: none;
     }
+    @media (max-width: 768px){
+        padding: 1vh 2vw;
+        font-size: 14px;
+    }
 `
 export default UploadBtn

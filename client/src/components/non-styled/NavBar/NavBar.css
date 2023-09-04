@@ -120,6 +120,10 @@
     margin-left: 5px;
 }
 
+.responsive-not-hidden {
+    display: none !important;
+}
+
 @media (max-width: 768px) {
     .navigation-bar {
         width: 100%;
@@ -132,10 +136,18 @@
     }
 
     .nav-link {
-        margin: auto;
+        margin: 0 2vh;
     }
 
     .rigth-nav .user-logo {
         display: none;
+    }
+
+    .responsive-hidden {
+        display: none !important;
+    }
+
+    .responsive-not-hidden {
+        display: block !important;
     }
 }
